@@ -1,0 +1,28 @@
+{
+  "name": "ystube",
+  "version": "1.0.0",
+  "description": "Cloning Youtube",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenatman/ystube.git"
+  },
+  "author": "YS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kenatman/ystube/issues"
+  },
+  "homepage": "https://github.com/kenatman/ystube#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "nodemon": "^2.0.7"
+  }
+}
