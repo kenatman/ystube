@@ -4,26 +4,47 @@ const PORT = 4000;
 
 const app = express();
 
-const logger = (req, res, next) => {
-  console.log(`${req.method} : ${req.url}`);
-  next();
-};
-
-const protecter = (req, res, next) => {
-  if (req.url === `/protected`) {
-    return res.send(`<h1>It is locked</h1>`);
-  }
-  console.log(`keep going...`);
-  next();
-};
-
 const handleHome = (req, res) => {
-  res.send(`handleHome`);
+  res.send(`HOME`);
 };
-app.use(logger);
-app.use(protecter);
+
+const urlLogger = (req, res, next) => {
+  console.log(`PATH : ${req.path}`);
+  next();
+};
+
+const timeLogger = (req, res, next) => {
+  req.timeLogger = new Date();
+  console.log(
+    `${req.timeLogger.getFullYear()}.${
+      req.timeLogger.getMonth() + 1
+    }.${req.timeLogger.getDate()}`
+  );
+  next();
+};
+
+const securityLogger = (req, res, next) => {
+  if (req.protocol === `https`) {
+    console.log(`Secure 🎉`);
+    next();
+  } else {
+    console.log(`Insecure 💩`);
+    next();
+  }
+};
+
+const protector = (req, res, next) => {
+  if (req.url === "/protected") {
+    console.log(`It is protected!!`);
+    res.end();
+  } else {
+    next();
+  }
+};
+
+app.use(urlLogger, timeLogger, securityLogger, protector);
 app.get("/", handleHome);
-app.get("/protected", (req, res) => res.send(`This is private lounge!!!`));
+app.get("/protected", (req, res) => res.send(`locked`));
 
 const handleListening = () => {
   console.log(`✅ Server Listening on port http://localhost:${PORT} 🚀`);
