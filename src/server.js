@@ -1,5 +1,8 @@
 import express from "express";
 import morgan from "morgan";
+import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
 
 const PORT = 4000;
 
@@ -7,18 +10,6 @@ const app = express();
 
 const logger = morgan("dev");
 app.use(logger);
-
-const globalRouter = express.Router();
-const handleHome = (req, res) => res.send(`HOME`);
-globalRouter.get("/", handleHome);
-
-const userRouter = express.Router();
-const handleUserEdit = (req, res) => res.send(`USER-EDIT`);
-userRouter.get("/edit", handleUserEdit);
-
-const videoRouter = express.Router();
-const handleVideoWatch = (req, res) => res.send(`VIDEO-WATCH`);
-videoRouter.get("/watch", handleVideoWatch);
 
 app.use("/", globalRouter);
 app.use("/users", userRouter);
