@@ -1,4 +1,4 @@
-export const home = (req, res) => res.render("home");
+export const home = (req, res) => res.render("home", { pageTitle: "HOME" });
 export const see = (req, res) => res.render("see");
 export const edit = (req, res) => res.render("edit");
 
