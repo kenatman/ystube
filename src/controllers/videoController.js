@@ -1,4 +1,7 @@
-export const home = (req, res) => res.render("home", { pageTitle: "HOME" });
+const fakeUser = { userName: "YS", loggedIn: false };
+
+export const home = (req, res) =>
+  res.render("home", { pageTitle: "HOME", fakeUser });
 export const see = (req, res) => res.render("see");
 export const edit = (req, res) => res.render("edit");
 
