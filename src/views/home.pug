@@ -1,11 +1,8 @@
-extends base.pug
-
+extends base
+include mixins/video
   
 
 block content 
   h1 wecome to the pug world
-  ul 
-    each video in videos 
-      li=video
-    else  
-      li No Video Found.
+  each potato in videos
+    +video(potato)
