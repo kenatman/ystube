@@ -7,14 +7,8 @@ import Video from "../models/Video";
 
 // Promise way. async - await
 export const home = async (req, res) => {
-  try {
-    const videos = await Video.find({});
-    console.log(videos);
-    console.log(`fisnish`);
-    res.render("home", { pageTitle: "HOME", videos });
-  } catch (error) {
-    res.render("error-page", { error });
-  }
+  const videos = await Video.find({});
+  res.render("home", { pageTitle: "HOME", videos });
 };
 
 export const see = (req, res) => {
@@ -40,5 +34,14 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = (req, res) => {
+  const { title, description, hashtags } = req.body;
+  const video = new Video({
+    title,
+    description,
+    createdAt: new Date(),
+    hashTags: hashtags.split(`,`).map((item) => `#${item}`),
+    meta: { view: 0, ratings: 0 },
+  });
+  console.log(video);
   return res.redirect("/");
 };
