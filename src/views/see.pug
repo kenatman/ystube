@@ -1,11 +1,9 @@
 extends base.pug
 
 
-
- 
-
 block content 
-  a(href=`${video.id}/edit`) #{video.views} #{video.views===1 ? "view" : "views"}
+  div 
+    p=video.description
+    small=video.createdAt 
+  a(href=`${video.id}/edit`) EDIT VIDEO
 
-  //- absolute URL : "/edit" : localhost:4000/edit
-  //- relative URL : "edit" : 현재 있는 URL에서 맨끝만 변화. localhost:4000/videos/edit
