@@ -2,27 +2,8 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   const videos = await Video.find({});
-  console.log(videos);
+
   res.render("home", { pageTitle: "HOME", videos });
-};
-
-export const see = async (req, res) => {
-  const { id } = req.params;
-  const video = await Video.findById(id);
-
-  return res.render("see", { pageTitle: video.title, video });
-};
-export const getEdit = (req, res) => {
-  const { id } = req.params;
-
-  return res.render("edit", { pageTitle: `Editing` });
-};
-
-export const postEdit = (req, res) => {
-  const { id } = req.params;
-  const { title } = req.body;
-
-  return res.redirect(`/videos/${id}`);
 };
 
 export const getUpload = (req, res) => {
@@ -35,7 +16,7 @@ export const postUpload = async (req, res) => {
     await Video.create({
       title,
       description,
-      hashTags: hashtags.split(`,`).map((item) => `#${item}`),
+      hashtags: hashtags.split(`,`).map((item) => `#${item}`),
     });
     return res.redirect("/");
   } catch (error) {
@@ -44,4 +25,38 @@ export const postUpload = async (req, res) => {
       errorMessage: error._message,
     });
   }
+};
+
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: `NOT FOUND VIDEO` });
+  }
+  return res.render("see", { pageTitle: video.title, video });
+};
+
+export const getEdit = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: `NOT FOUND VIDEO` });
+  }
+  return res.render("edit", { pageTitle: `Editing ${video.title}`, video });
+};
+
+export const postEdit = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, hashtags } = req.body;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: `NOT FOUND VIDEO` });
+  }
+  video.title = title;
+  video.description = description;
+  video.hashtags = hashtags
+    .split(`,`)
+    .map((item) => (item.startsWith(`#`) ? item : `#${item}`));
+  await video.save();
+  return res.redirect(`/videos/${id}`);
 };
