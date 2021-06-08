@@ -1,7 +1,7 @@
 import Video from "../models/Video";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({});
+  const videos = await Video.find({}).sort({ createdAt: `desc` });
 
   res.render("home", { pageTitle: "HOME", videos });
 };
@@ -66,4 +66,16 @@ export const deleteVideo = async (req, res) => {
   const { id } = req.params;
   await Video.findByIdAndDelete(id);
   return res.redirect("/");
+};
+
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  let videos = [];
+  if (keyword) {
+    videos = await Video.find({
+      title: { $regex: keyword, $options: `i` },
+    });
+    //{title: new RegExp(keyword, `i`)}.. $regex is MongoDB operator not mongoose..
+  }
+  return res.render("search", { pageTitle: `SEARCH VIDEO`, videos });
 };
