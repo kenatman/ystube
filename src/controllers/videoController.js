@@ -61,3 +61,9 @@ export const postEdit = async (req, res) => {
 
   return res.redirect(`/videos/${id}`);
 };
+
+export const deleteVideo = async (req, res) => {
+  const { id } = req.params;
+  await Video.findByIdAndDelete(id);
+  return res.redirect("/");
+};
