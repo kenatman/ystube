@@ -1,7 +1,7 @@
 doctype html
 html(lang="en")
   head 
-    title #{pageTitle} | YStube
+    title #{pageTitle} | #{siteName}
     link(rel="stylesheet" href="https://unpkg.com/mvp.css")
   body 
     header
@@ -14,10 +14,16 @@ html(lang="en")
             a(href="/") HOME
           li  
             a(href="/search") SEARCH
-          li  
-            a(href="/join") JOIN
-          li  
-            a(href="/join") LOGIN
+          if loggedIn
+            li  
+              a(href="/logout") LOGOUT
+            li  
+              a(href="/user-profile") #{loggedInUser.name}의 Profile
+          else  
+            li  
+              a(href="/join") JOIN
+            li  
+              a(href="/login") LOGIN
     main
       block content
   include partials/footer
