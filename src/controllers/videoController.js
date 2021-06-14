@@ -16,7 +16,6 @@ export const postUpload = async (req, res) => {
     await Video.create({
       title,
       description,
-      createdAt: `lalalal`,
       hashtags: Video.formatHashtags(hashtags),
     });
     return res.redirect("/");
