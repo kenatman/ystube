@@ -134,8 +134,33 @@ export const getEdit = (req, res) => {
   return res.render(`edit-profile`, { pageTitle: `EDIT PROFILE` });
 };
 
-export const postEdit = (req, res) => {
-  return res.end();
+export const postEdit = async (req, res) => {
+  const {
+    body: { email, username, name, location },
+    session: {
+      user: { _id },
+    },
+  } = req;
+  try {
+    // mongoose method : third parameter
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      { email, username, name, location },
+      { new: true }
+    );
+
+    //manual method : ... spread syntax
+    //req.session.user = { ...req.session.user, email, username, name, location };
+
+    req.session.user = updatedUser;
+
+    return res.redirect("/users/edit");
+  } catch (error) {
+    return res.render("edit-profile", {
+      pageTitle: "EDIT PROFILE",
+      errorMessage: `ERROR`,
+    });
+  }
 };
 
 export const deleteUser = (req, res) => res.send(`DELETE MY PROFILE`);
