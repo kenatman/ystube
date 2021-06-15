@@ -149,12 +149,13 @@ export const postEdit = async (req, res) => {
       { new: true }
     );
 
-    //manual method : ... spread syntax
-    //req.session.user = { ...req.session.user, email, username, name, location };
-
     req.session.user = updatedUser;
 
     return res.redirect("/users/edit");
+
+    //manual method : ... spread syntax
+    //await User.findByIdAndUpdate(_id, { email, username, name, location });
+    //req.session.user = { ...req.session.user, email, username, name, location };
   } catch (error) {
     return res.render("edit-profile", {
       pageTitle: "EDIT PROFILE",
@@ -163,9 +164,22 @@ export const postEdit = async (req, res) => {
   }
 };
 
-export const deleteUser = (req, res) => res.send(`DELETE MY PROFILE`);
-export const see = (req, res) => res.send(`SEE USER`);
 export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
+
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render(`users/change-password`, { pageTitle: `CHANGE PASSWORD` });
+};
+
+export const postChangePassword = (req, res) => {
+  //...
+  return res.redirect("/");
+};
+
+export const deleteUser = (req, res) => res.send(`DELETE MY PROFILE`);
+export const see = (req, res) => res.send(`SEE USER`);

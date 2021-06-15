@@ -10,3 +10,6 @@ block content
     input(name="name", type="text", required, placeholder="put your name",value=loggedInUser.name)
     input(name="location", type="text", placeholder="put your location",value=loggedInUser.location)
     input(type="submit", value="EDIT PROFILE")
+  if !loggedInUser.socialOnly
+    hr
+    a(href="change-password") CHANGE PASSWORD &rarr;
