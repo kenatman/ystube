@@ -107,6 +107,7 @@ export const finishGithubLogin = async (req, res) => {
     );
 
     if (!emailObj) {
+      // set notification
       return res.redirect("/login");
     }
     let user = await User.findOne({ email: emailObj.email });
@@ -129,7 +130,14 @@ export const finishGithubLogin = async (req, res) => {
   }
 };
 
-export const edit = (req, res) => res.send(`EDIT MY PROFILE`);
+export const getEdit = (req, res) => {
+  return res.render(`edit-profile`, { pageTitle: `EDIT PROFILE` });
+};
+
+export const postEdit = (req, res) => {
+  return res.end();
+};
+
 export const deleteUser = (req, res) => res.send(`DELETE MY PROFILE`);
 export const see = (req, res) => res.send(`SEE USER`);
 export const logout = (req, res) => {
