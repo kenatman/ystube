@@ -27,7 +27,7 @@ app.use(
 );
 
 app.use(localMiddleware);
-app.use("/upload", express.static("upload"));
+app.use("/uploads", express.static("uploads"));
 // when user gets to /upload, give contents inside of upload folder..
 app.use("/", globalRouter);
 app.use("/users", userRouter);

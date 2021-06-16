@@ -9,7 +9,7 @@ import {
   getChangePassword,
   postChangePassword,
 } from "../controllers/usercontroller";
-import { fileUpload, privateOnly, publicOnly } from "../localMiddleware";
+import { avatarUpload, privateOnly, publicOnly } from "../localMiddleware";
 
 const userRouter = express.Router();
 
@@ -19,7 +19,7 @@ userRouter
   .route("/edit")
   .all(privateOnly)
   .get(getEdit)
-  .post(fileUpload.single("avatar"), postEdit);
+  .post(avatarUpload.single("avatar"), postEdit);
 //fileUpload.single("Input name where file comes from..")
 userRouter.get("/github/start", publicOnly, startGithubLogin);
 userRouter.get("/github/finish", publicOnly, finishGithubLogin);
