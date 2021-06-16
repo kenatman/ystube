@@ -139,15 +139,22 @@ export const postEdit = async (req, res) => {
   const {
     body: { email, username, name, location },
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
+    file,
   } = req;
-  console.log(req.file);
+
   try {
     // mongoose method : third parameter
     const updatedUser = await User.findByIdAndUpdate(
       _id,
-      { email, username, name, location },
+      {
+        email,
+        username,
+        name,
+        location,
+        avatarUrl: file ? file.path : avatarUrl,
+      },
       { new: true }
     );
 
