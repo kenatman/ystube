@@ -4,7 +4,9 @@ extends base.pug
 block content 
   if errorMessage 
     h2=errorMessage
-  form(method="POST")
+  form(method="POST", enctype="multipart/form-data")
+    label(for="avatar") AVATAR  
+    input(id="avatar", name="avatar", type="file", accept="image/*")
     input(name="email", type="email", required, placeholder="put your email", value=loggedInUser.email)
     input(name="username", type="text", required, placeholder="put your username",value=loggedInUser.username)
     input(name="name", type="text", required, placeholder="put your name",value=loggedInUser.name)

@@ -9,14 +9,18 @@ import {
   getChangePassword,
   postChangePassword,
 } from "../controllers/usercontroller";
-import { privateOnly, publicOnly } from "../localMiddleware";
+import { fileUpload, privateOnly, publicOnly } from "../localMiddleware";
 
 const userRouter = express.Router();
 
 userRouter.get("/logout", privateOnly, logout);
 
-userRouter.route("/edit").all(privateOnly).get(getEdit).post(postEdit);
-
+userRouter
+  .route("/edit")
+  .all(privateOnly)
+  .get(getEdit)
+  .post(fileUpload.single("avatar"), postEdit);
+//fileUpload.single("Input name where file comes from..")
 userRouter.get("/github/start", publicOnly, startGithubLogin);
 userRouter.get("/github/finish", publicOnly, finishGithubLogin);
 

@@ -142,6 +142,7 @@ export const postEdit = async (req, res) => {
       user: { _id },
     },
   } = req;
+  console.log(req.file);
   try {
     // mongoose method : third parameter
     const updatedUser = await User.findByIdAndUpdate(

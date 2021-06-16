@@ -1,3 +1,5 @@
+import multer from "multer";
+
 export const localMiddleware = (req, res, next) => {
   res.locals.siteName = "YStube";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
@@ -20,3 +22,5 @@ export const publicOnly = (req, res, next) => {
     return res.redirect("/");
   }
 };
+
+export const fileUpload = multer({ dest: "upload/" });
