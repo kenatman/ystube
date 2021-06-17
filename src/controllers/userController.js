@@ -207,8 +207,21 @@ export const postChangePassword = async (req, res) => {
   }
   const newHashedPassword = await bcrypt.hash(newPassword, 5);
   await User.findByIdAndUpdate(_id, { password: newHashedPassword });
+  // method 2 :
+  // const user = await User.findById(_id);
+  // user.password = newPassword;
+  // await user.save();
+  // // req.session.user.password = user.password;
   return res.redirect("/users/logout");
 };
 
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).render("404", { pageTitle: `User Not Found` });
+  }
+  return res.render("users/profile", { pageTitle: user.name, user });
+};
+
 export const deleteUser = (req, res) => res.send(`DELETE MY PROFILE`);
-export const see = (req, res) => res.send(`SEE USER`);

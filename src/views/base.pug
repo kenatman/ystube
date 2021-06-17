@@ -16,6 +16,8 @@ html(lang="en")
           if loggedIn
             li  
               a(href="/users/logout") LOGOUT
+            li 
+              a(href=`/users/${loggedInUser._id}`) SEE PROFILE  
             li  
               a(href="/users/edit") EDIT PROFILE
             li  

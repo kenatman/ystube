@@ -5,8 +5,12 @@ block content
   video(src="/"+video.fileUrl, width="500", height="400", controls)
   div 
     p=video.description
-    small=video.createdAt 
-  a(href=`${video.id}/edit`) EDIT VIDEO
-  br
-  a(href=`${video.id}/delete`) DELETE VIDEO
+    small=video.createdAt
+    br
+    small Created By #{owner.name} 
+
+  if String(video.owner) === String(loggedInUser._id)  
+    a(href=`${video.id}/edit`) EDIT VIDEO
+    br
+    a(href=`${video.id}/delete`) DELETE VIDEO
 
