@@ -41,14 +41,13 @@ export const postUpload = async (req, res) => {
 
 export const see = async (req, res) => {
   const { id } = req.params;
-  //💩💩💩
-  const video = await Video.findById(id);
-  const owner = await User.findById(video.owner);
 
+  const video = await Video.findById(id).populate("owner");
+  console.log(video);
   if (!video) {
     return res.status(404).render("404", { pageTitle: `NOT FOUND VIDEO` });
   }
-  return res.render("see", { pageTitle: video.title, video, owner });
+  return res.render("see", { pageTitle: video.title, video });
 };
 
 export const getEdit = async (req, res) => {

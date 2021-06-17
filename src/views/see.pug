@@ -7,9 +7,10 @@ block content
     p=video.description
     small=video.createdAt
     br
-    small Created By #{owner.name} 
+    small Created By 
+      a(href=`/users/${video.owner._id}`)=video.owner.name 
 
-  if String(video.owner) === String(loggedInUser._id)  
+  if String(video.owner._id) === String(loggedInUser._id)  
     a(href=`${video.id}/edit`) EDIT VIDEO
     br
     a(href=`${video.id}/delete`) DELETE VIDEO
