@@ -3,6 +3,12 @@ extends base.pug
 
 block content 
   video(src="/"+video.fileUrl, width="500", height="400", controls)
+  div 
+    button#play PLAY 
+    button#mute MUTE 
+    span#time 00:00/00:00
+    input(type="range",step="0.1", min="0", max="1")#volume
+
   //- div 
   //-   p=video.description
   //-   small=video.createdAt
