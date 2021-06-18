@@ -5,10 +5,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   watch: true,
-  entry: "./src/client/js/main.js",
+  entry: {
+    main: "./src/client/js/main.js",
+    videoPlayer: "./src/client/js/videoPlayer.js",
+  },
   mode: "development",
   output: {
-    filename: "js/main.js",
+    filename: "js/[name].js", //webpack variable [name] from entry object key..
     path: path.resolve(__dirname, "assets"),
     clean: true,
   },

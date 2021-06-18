@@ -3,15 +3,18 @@ extends base.pug
 
 block content 
   video(src="/"+video.fileUrl, width="500", height="400", controls)
-  div 
-    p=video.description
-    small=video.createdAt
-    br
-    small Created By 
-      a(href=`/users/${video.owner._id}`)=video.owner.name 
+  //- div 
+  //-   p=video.description
+  //-   small=video.createdAt
+  //-   br
+  //-   small Created By 
+  //-     a(href=`/users/${video.owner._id}`)=video.owner.name 
 
-  if String(video.owner._id) === String(loggedInUser._id)  
-    a(href=`${video.id}/edit`) EDIT VIDEO
-    br
-    a(href=`${video.id}/delete`) DELETE VIDEO
+  //- if String(video.owner._id) === String(loggedInUser._id)  
+  //-   a(href=`${video.id}/edit`) EDIT VIDEO
+  //-   br
+  //-   a(href=`${video.id}/delete`) DELETE VIDEO
+
+block scripts
+  script(src="/static/js/videoPlayer.js")
 
