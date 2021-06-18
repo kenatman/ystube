@@ -2,8 +2,9 @@ import Video from "../models/Video";
 import User from "../models/User";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({}).sort({ createdAt: `desc` });
-
+  const videos = await Video.find({})
+    .sort({ createdAt: `desc` })
+    .populate("owner");
   res.render("home", { pageTitle: "HOME", videos });
 };
 
@@ -124,7 +125,7 @@ export const search = async (req, res) => {
   if (keyword) {
     videos = await Video.find({
       title: { $regex: keyword, $options: `i` },
-    });
+    }).populate("owner");
     //{title: new RegExp(keyword, `i`)}.. $regex is MongoDB operator not mongoose..
   }
   return res.render("search", { pageTitle: `SEARCH VIDEO`, videos });
