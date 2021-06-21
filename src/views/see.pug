@@ -2,7 +2,7 @@ extends base.pug
 
 
 block content 
-  video(src="/"+video.fileUrl, width="500", height="400", controls)
+  video(src="/"+video.fileUrl, width="500", height="400")
   div 
     button#play PLAY 
     button#mute MUTE 
@@ -10,7 +10,9 @@ block content
       span#currentTime 00:00
       span  / 
       span#totalTime 00:00
-    input(type="range",step="0.1", min="0", max="1", value="0.5")#volume
+      input(type="range",step="0.1", min="0", max="1", value="0.5")#volume
+    div
+      input(type="range",step="1", min="0", value="0")#timeline
 
   //- div 
   //-   p=video.description
