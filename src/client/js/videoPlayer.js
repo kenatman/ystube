@@ -1,11 +1,14 @@
 const playBtn = document.querySelector(`#play`);
+const playBtnIcon = playBtn.querySelector(`i`);
 const muteBtn = document.querySelector(`#mute`);
+const muteBtnIcon = muteBtn.querySelector(`i`);
 const volumeRange = document.querySelector(`#volume`);
 const video = document.querySelector("video");
 const currentTime = document.querySelector(`#currentTime`);
 const totalTime = document.querySelector(`#totalTime`);
 const timeline = document.querySelector(`#timeline`);
 const fullScreenBtn = document.querySelector(`#fullScreen`);
+const fullScreenBtnIcon = fullScreenBtn.querySelector(`i`);
 const videoContainer = document.querySelector(`#videoContainer`);
 const videoControls = document.querySelector(`#videoControls`);
 
@@ -21,7 +24,7 @@ const handlePlay = () => {
   } else {
     video.pause();
   }
-  playBtn.innerText = video.paused ? `PLAY` : `PAUSE`;
+  playBtnIcon.classList = video.paused ? `fas fa-play` : `fas fa-pause`;
 };
 
 const handleMute = () => {
@@ -30,7 +33,9 @@ const handleMute = () => {
   } else {
     video.muted = true;
   }
-  muteBtn.innerText = video.muted ? `UNMUTE` : `MUTE`;
+  muteBtnIcon.classList = video.muted
+    ? `fas fa-volume-mute`
+    : `fas fa-volume-up`;
   volumeRange.value = video.muted ? 0 : volumeValue;
 };
 
@@ -70,10 +75,10 @@ const handleFullScreen = () => {
   const fullScreenState = document.fullscreenElement;
   if (fullScreenState) {
     document.exitFullscreen();
-    fullScreenBtn.innerText = `Go To FullScreen`;
+    fullScreenBtnIcon.classList = `fas fa-expand`;
   } else {
     videoContainer.requestFullscreen();
-    fullScreenBtn.innerText = `Exit FullScreen`;
+    fullScreenBtnIcon.classList = `fas fa-compress`;
   }
 };
 
@@ -97,11 +102,19 @@ const handleMouseLeave = () => {
 };
 
 playBtn.addEventListener("click", handlePlay);
+video.addEventListener("click", handlePlay);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeRange);
-video.addEventListener("loadedmetadata", handleLoadedMetaData);
+video.addEventListener("loadeddata", handleLoadedMetaData);
 video.addEventListener("timeupdate", handleTimeUpdate);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
-video.addEventListener("mousemove", handleMouseMove);
-video.addEventListener("mouseleave", handleMouseLeave);
+videoContainer.addEventListener("mousemove", handleMouseMove);
+videoContainer.addEventListener("mouseleave", handleMouseLeave);
+
+document.onkeydown = (e) => {
+  if (e.keyCode === 32) {
+    e.preventDefault();
+    handlePlay();
+  }
+};
