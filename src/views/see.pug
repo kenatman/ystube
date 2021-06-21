@@ -4,7 +4,7 @@ extends base.pug
 block content 
   div#videoContainer
     video(src="/"+video.fileUrl, width="500", height="400")
-    div 
+    div#videoControls
       button#play PLAY 
       button#mute MUTE 
       div     
