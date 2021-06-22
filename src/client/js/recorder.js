@@ -3,8 +3,15 @@ const video = document.getElementById("preview");
 
 let stream;
 let recorder;
+let videoFile;
 
-const handleDownload = () => {};
+const handleDownload = () => {
+  const a = document.createElement("a");
+  a.href = videoFile;
+  a.download = "My Own Video.webm";
+  document.body.appendChild(a);
+  a.click();
+};
 
 const handleStop = () => {
   recorderBtn.innerText = `Download Recording~~`;
@@ -12,7 +19,7 @@ const handleStop = () => {
   recorderBtn.addEventListener("click", handleDownload);
   recorder.stop();
   recorder.ondataavailable = (e) => {
-    const videoFile = URL.createObjectURL(e.data); // create URL available only on the browser's memory
+    videoFile = URL.createObjectURL(e.data); // create URL available only on the browser's memory
     video.srcObject = null;
     video.src = videoFile;
     video.loop = true;
