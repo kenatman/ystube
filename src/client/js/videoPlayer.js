@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 const playBtn = document.querySelector(`#play`);
 const playBtnIcon = playBtn.querySelector(`i`);
 const muteBtn = document.querySelector(`#mute`);
