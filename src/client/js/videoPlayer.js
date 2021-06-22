@@ -113,7 +113,7 @@ videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 
 document.onkeydown = (e) => {
-  if (e.keyCode === 32) {
+  if (e.key === " ") {
     e.preventDefault();
     handlePlay();
   }
