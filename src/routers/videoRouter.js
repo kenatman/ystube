@@ -22,6 +22,9 @@ videoRouter
   .route("/upload")
   .all(privateOnly)
   .get(getUpload)
-  .post(videoUpload.single("video"), postUpload);
+  .post(
+    videoUpload.fields([{ name: "video" }, { name: "thumbnail" }]),
+    postUpload
+  );
 
 export default videoRouter;
