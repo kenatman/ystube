@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import morgan from "morgan";
 import { localMiddleware } from "./localMiddleware";
@@ -27,6 +28,8 @@ app.use(
   })
 );
 
+app.use(flash());
+
 app.use(localMiddleware);
 app.use("/uploads", express.static("uploads"));
 // when user gets to /upload, give contents inside of upload folder..
@@ -34,6 +37,6 @@ app.use("/static", express.static("assets"));
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
-app.use("/api", apiRouter)
+app.use("/api", apiRouter);
 
 export default app;

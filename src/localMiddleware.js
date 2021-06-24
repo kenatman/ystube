@@ -11,6 +11,7 @@ export const privateOnly = (req, res, next) => {
   if (req.session.loggedIn) {
     return next();
   } else {
+    req.flash("error", "You must login first!!");
     return res.redirect("/login");
   }
 };
@@ -19,6 +20,7 @@ export const publicOnly = (req, res, next) => {
   if (!req.session.loggedIn) {
     return next();
   } else {
+    req.flash("error", "You already logged in!!!");
     return res.redirect("/");
   }
 };
