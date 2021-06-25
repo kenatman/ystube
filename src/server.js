@@ -17,7 +17,9 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 
 app.use(logger);
-app.use(express.urlencoded({ extended: true }));
+
+app.use(express.urlencoded({ extended: true })); // this middleware allows Express to understand data submitted from form as req.body
+app.use(express.json()); // this middleware allows Express to convert string data coming from fetch to JSON and understand converted file.
 
 app.use(
   session({
