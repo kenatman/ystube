@@ -159,5 +159,5 @@ export const createComment = async (req, res) => {
   const comment = await Comment.create({ text, owner: user._id, video: id });
   video.comments.push(comment._id);
   await video.save();
-  return res.sendStatus(201);
+  return res.status(201).json({ newCommentId: comment._id });
 };
