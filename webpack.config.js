@@ -4,14 +4,13 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  watch: true,
   entry: {
     main: "./src/client/js/main.js",
     videoPlayer: "./src/client/js/videoPlayer.js",
     recorder: "./src/client/js/recorder.js",
     commentSection: "./src/client/js/commentSection.js",
   },
-  mode: "development",
+
   output: {
     filename: "js/[name].js", //webpack variable [name] from entry object key..
     path: path.resolve(__dirname, "assets"),
