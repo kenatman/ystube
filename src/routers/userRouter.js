@@ -8,7 +8,7 @@ import {
   postEdit,
   getChangePassword,
   postChangePassword,
-} from "../controllers/usercontroller";
+} from "../controllers/userController";
 import { avatarUpload, privateOnly, publicOnly } from "../localMiddleware";
 
 const userRouter = express.Router();

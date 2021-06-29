@@ -4,7 +4,7 @@ import {
   postJoin,
   getLogin,
   postLogin,
-} from "../controllers/usercontroller";
+} from "../controllers/userController";
 import { home, search } from "../controllers/videoController";
 import { publicOnly } from "../localMiddleware";
 
