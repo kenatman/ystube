@@ -4,7 +4,7 @@ include ../mixins/video
 
 block content 
   .profile__data 
-    img(src="/"+user.avatarUrl).avatar
+    img(src=user.avatarUrl).avatar
     h3=user.name
   .video-grid 
     each video in user.videos
