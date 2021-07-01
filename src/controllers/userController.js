@@ -144,6 +144,7 @@ export const postEdit = async (req, res) => {
     },
     file,
   } = req;
+  const isHeroku = process.env.NODE_ENV === `production`;
 
   try {
     // mongoose method : third parameter
@@ -154,7 +155,7 @@ export const postEdit = async (req, res) => {
         username,
         name,
         location,
-        avatarUrl: file ? file.location : avatarUrl,
+        avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
       },
       { new: true }
     );
