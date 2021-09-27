@@ -1,14 +1,8 @@
-/ -> Home
-/join -> Join
-/login -> Login
-/search -> Search
+- [ ] MVC model : create my own video platform like Youtube.
 
-/users/:id -> See User
-/users/logout -> Log Out
-/users/edit -> Edit My profile
-/users/delete -> Delete MY profile
+  1.  Model : Mongoose, MongoDB
+  2.  View : Pug
+  3.  Controller : front-end -> vanillaJS / back-end -> NodeJS
 
-/videos/:id -> See Video
-/videos/:id/edit -> Edit Video
-/videos/:id/delete -> Delete Video
-/videos/upload -> Upload Video
+- [ ] AWS S3 : store media file on AWS S3 strorage
+- [ ] deploy : using Heroku, deploy the web-app.
