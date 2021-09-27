@@ -120,7 +120,7 @@ export const finishGithubLogin = async (req, res) => {
         username: userData.login,
         password: "",
         socialOnly: true,
-        name: userData.name,
+        name: userData.name ? userData.name : "Unknown",
         location: userData.location,
       });
     }
